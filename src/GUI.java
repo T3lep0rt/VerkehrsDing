@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JLabel;
 
 public class GUI {
 
@@ -51,13 +52,20 @@ public class GUI {
 		frame.getContentPane().add(tfEingabe);
 		tfEingabe.setColumns(10);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(107, 81, 46, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VerkehrsManager.setInput(tfEingabe.getText());
+				lblNewLabel.setText(VerkehrsManager.getStau());
 			}
 		});
 		btnSubmit.setBounds(136, 198, 89, 23);
 		frame.getContentPane().add(btnSubmit);
+		
+
 	}
 }
