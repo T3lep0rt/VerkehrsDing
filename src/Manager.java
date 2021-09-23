@@ -3,7 +3,6 @@ public class Manager {
 
 	private Stack<String> meldung = new Stack<String>();
 	String UserInput;
-	boolean istLeer = true;
 	
 	public void setInput(String pInput) {
 		meldung.push(pInput);
@@ -11,19 +10,20 @@ public class Manager {
 	public String getStau() {
 		 return meldung.top();
 	}
-	public void istLeer() {
+	public boolean istLeer() {
 		if(meldung.top() == null) {
-			istLeer = true;
+			return true;
 		}else {
-			istLeer = false;
+			return false;
 		}
 	}
 	public String vorherigeMeldung() {
-		
-		if(istLeer) {
-			return "Error 404";
+		String temp = meldung.top();
+		meldung.pop();
+		if(istLeer()) {
+			meldung.push(temp);
+			return meldung.top();
 		}else {
-			meldung.pop();
 			return meldung.top();
 		}
 		
