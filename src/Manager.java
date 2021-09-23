@@ -2,6 +2,7 @@
 public class Manager {
 
 	private Stack<String> meldung = new Stack<String>();
+	private Stack<String> fwdStack = new Stack<String>();
 	String UserInput;
 	
 	public void setInput(String pInput) {
@@ -10,8 +11,8 @@ public class Manager {
 	public String getStau() {
 		 return meldung.top();
 	}
-	public boolean istLeer() {
-		if(meldung.top() == null) {
+	public boolean istLeer(Stack<String> pMeldung) {
+		if(pMeldung.top() == null) {
 			return true;
 		}else {
 			return false;
@@ -20,13 +21,28 @@ public class Manager {
 	public String vorherigeMeldung() {
 		String temp = meldung.top();
 		meldung.pop();
-		if(istLeer()) {
+		if(istLeer(meldung)) {
 			meldung.push(temp);
 			return meldung.top();
 		}else {
-			return meldung.top();
+			fwdStack.push(temp);
+			return fwdStack.top();
 		}
 		
+	}
+	public String forward() {
+		
+		String temp = fwdStack.top();
+		fwdStack.pop();
+		if(istLeer(fwdStack)) {
+			fwdStack.push(temp);
+			return fwdStack.top();
+		}else {
+			meldung.push(temp);
+			return meldung.top();
+		
+		
+	}
 	}
 	
 }

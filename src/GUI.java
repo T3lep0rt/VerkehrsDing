@@ -13,6 +13,7 @@ import java.awt.Font;
 public class GUI {
 
 	private JFrame frame;
+	private JFrame frameTwo;
 	private Manager VerkehrsManager = new Manager();
 	private JTextField tfEingabe;
 
@@ -44,8 +45,10 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.pack();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
 		tfEingabe = new JTextField();
@@ -57,6 +60,18 @@ public class GUI {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		lblNewLabel.setBounds(171, 0, 263, 188);
 		frame.getContentPane().add(lblNewLabel);
+		
+		frameTwo = new JFrame();
+		frameTwo.setBounds(100, 100, 450, 300);
+		frameTwo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameTwo.setLocation(frame.getX() + frame.getWidth(), frame.getY());
+		frameTwo.setVisible(true);
+
+		
+		JLabel lblAnzeige = new JLabel("");
+		lblAnzeige.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblAnzeige.setBounds(151, 65, 283, 84);
+		frameTwo.getContentPane().add(lblAnzeige);
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -74,13 +89,28 @@ public class GUI {
 				lblNewLabel.setText(VerkehrsManager.vorherigeMeldung());
 			}
 		});
-		btnBack.setBounds(235, 198, 89, 23);
+		btnBack.setBounds(234, 173, 89, 23);
 		frame.getContentPane().add(btnBack);
 		
 		JButton btnPush = new JButton("Push");
+		btnPush.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblAnzeige.setText(VerkehrsManager.getStau());
+			}
+		});
 		btnPush.setBounds(335, 198, 89, 23);
 		frame.getContentPane().add(btnPush);
 		
+		JButton btnForward = new JButton("Forward");
+		btnForward.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblNewLabel.setText(VerkehrsManager.forward());
+			}
+		});
+		btnForward.setBounds(234, 211, 89, 23);
+		frame.getContentPane().add(btnForward);
+		
+
 
 	}
 }
